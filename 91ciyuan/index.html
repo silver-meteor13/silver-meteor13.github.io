@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>91次元-二次元资源站_番剧更新与同人图鉴</title>
+<meta name="description" content="91次元是一个聚焦二次元内容的资源站首页，汇总番剧更新动态、同人插画图鉴、角色档案与社区讨论入口，帮助访客快速找到想看的作品与同好话题。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231b1436'/%3E%3Ccircle cx='32' cy='32' r='16' fill='none' stroke='%23ff5fa2' stroke-width='4'/%3E%3Ccircle cx='26' cy='29' r='3' fill='%2364e2ff'/%3E%3Ccircle cx='38' cy='29' r='3' fill='%2364e2ff'/%3E%3Cpath d='M26 39q6 5 12 0' stroke='%23ffd166' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0f0c1d;
+    --bg2:#171232;
+    --card:#1e1840;
+    --card2:#251d4f;
+    --line:rgba(255,255,255,.09);
+    --ink:#f2eefc;
+    --ink2:#b9b1d8;
+    --pink:#ff5fa2;
+    --cyan:#64e2ff;
+    --gold:#ffd166;
+    --violet:#9b7bff;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(900px 500px at 85% -10%, rgba(155,123,255,.28), transparent 65%),
+      radial-gradient(700px 420px at 0% 8%, rgba(255,95,162,.20), transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block;max-width:100%}
+  .wrap{width:100%;max-width:1140px;margin:0 auto;padding:0 20px}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(15,12,29,.78);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:18px;height:66px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:.5px;white-space:nowrap}
+  .logo .mark{width:34px;height:34px;flex:0 0 34px}
+  .logo span{background:linear-gradient(92deg,var(--pink),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  nav ul{display:flex;gap:22px;list-style:none;font-size:14.5px}
+  nav a{color:var(--ink2);transition:.2s;padding:4px 0;border-bottom:2px solid transparent}
+  nav a:hover{color:#fff;border-bottom-color:var(--pink)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:8px 16px;border-radius:999px;font-size:14px;font-weight:700;
+    background:linear-gradient(92deg,var(--pink),var(--violet));color:#fff;
+    box-shadow:0 6px 20px rgba(255,95,162,.32);
+  }
+  .menu-toggle{display:none;background:none;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:6px 10px;font-size:16px}
+
+  /* ---------- hero ---------- */
+  .hero{padding:56px 0 42px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:1.6px;
+    color:var(--cyan);border:1px solid rgba(100,226,255,.35);border-radius:999px;
+    padding:4px 12px;margin-bottom:18px;text-transform:uppercase;
+  }
+  .eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+  h1{
+    font-size:clamp(38px,6vw,60px);line-height:1.1;font-weight:900;letter-spacing:1px;
+    background:linear-gradient(96deg,#fff 8%,var(--pink) 48%,var(--cyan) 92%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-bottom:18px;
+  }
+  .hero p.lead{color:var(--ink2);font-size:16px;max-width:36em;margin-bottom:26px}
+  .hero p.lead strong{color:var(--ink);font-weight:700}
+  .btn-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;
+    font-size:15px;font-weight:700;transition:.2s;border:1px solid transparent;cursor:pointer;
+  }
+  .btn-main{background:linear-gradient(92deg,var(--pink),var(--violet));color:#fff;box-shadow:0 10px 26px rgba(155,123,255,.34)}
+  .btn-main:hover{transform:translateY(-2px)}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:rgba(255,255,255,.04)}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+  .btn[aria-disabled="true"]{opacity:.72;pointer-events:none;cursor:default}
+  .hero-stats{display:flex;gap:26px;margin-top:30px;flex-wrap:wrap}
+  .stat b{display:block;font-size:22px;font-weight:800;color:#fff;line-height:1.2}
+  .stat span{font-size:12.5px;color:var(--ink2)}
+
+  .hero-art{
+    position:relative;border-radius:26px;padding:18px;
+    background:linear-gradient(160deg,rgba(155,123,255,.22),rgba(255,95,162,.12));
+    border:1px solid var(--line);
+  }
+  .hero-art .frame{border-radius:20px;overflow:hidden;background:var(--bg2);border:1px solid var(--line)}
+  .hero-art .caption{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink2);padding:12px 4px 2px}
+
+  /* ---------- section base ---------- */
+  section{padding:44px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:26px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(22px,3vw,28px);font-weight:800;letter-spacing:.5px}
+  .sec-head h2 em{font-style:normal;color:var(--pink)}
+  .sec-head p{font-size:14px;color:var(--ink2);max-width:42em;margin-top:6px}
+  .more{font-size:13.5px;color:var(--cyan);border-bottom:1px dashed rgba(100,226,255,.4);padding-bottom:2px}
+
+  /* ---------- update list ---------- */
+  .filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+  .chip{
+    font-size:13px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);
+    color:var(--ink2);background:rgba(255,255,255,.03);cursor:pointer;transition:.2s;
+  }
+  .chip:hover{color:#fff;border-color:rgba(255,95,162,.5)}
+  .chip.on{background:linear-gradient(92deg,var(--pink),var(--violet));color:#fff;border-color:transparent;font-weight:700}
+  .list{display:grid;gap:12px}
+  .row{
+    display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;transition:.2s;
+  }
+  .row:hover{border-color:rgba(155,123,255,.5);transform:translateX(3px)}
+  .row .tag{
+    font-size:11.5px;text-align:center;font-weight:800;letter-spacing:.5px;
+    padding:6px 0;border-radius:8px;color:var(--bg);background:var(--gold);
+  }
+  .row .tag.new{background:var(--pink);color:#fff}
+  .row .tag.fin{background:var(--cyan);color:#0f0c1d}
+  .row h3{font-size:15.5px;font-weight:700;line-height:1.5}
+  .row h3 small{font-weight:400;color:var(--ink2);font-size:12.5px;margin-left:8px}
+  .row .meta{font-size:12.5px;color:var(--ink2);white-space:nowrap}
+  .empty{color:var(--ink2);font-size:14px;padding:18px 0;display:none}
+
+  /* ---------- cards ---------- */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{
+    background:linear-gradient(170deg,var(--card2),var(--card));
+    border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:.25s;position:relative;overflow:hidden;
+  }
+  .card:hover{transform:translateY(-4px);border-color:rgba(100,226,255,.4)}
+  .card .ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;margin-bottom:14px;background:rgba(255,95,162,.14)}
+  .card h3{font-size:17px;font-weight:800;margin-bottom:8px}
+  .card p{font-size:14px;color:var(--ink2)}
+  .card .kw{position:absolute;right:-8px;bottom:-14px;font-size:46px;font-weight:900;color:rgba(255,255,255,.04);letter-spacing:2px}
+
+  /* ---------- gallery ---------- */
+  .gal{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .gal figure{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--bg2);transition:.25s}
+  .gal figure:hover{border-color:rgba(255,95,162,.55)}
+  .gal figcaption{font-size:12.5px;color:var(--ink2);padding:9px 12px;display:flex;justify-content:space-between;gap:6px}
+  .gal figcaption b{color:var(--ink);font-weight:600;font-size:12.5px}
+
+  /* ---------- notes ---------- */
+  .notes{display:grid;grid-template-columns:1.3fr .7fr;gap:22px}
+  .article{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .article h3{font-size:19px;font-weight:800;margin-bottom:12px}
+  .article p{font-size:14.5px;color:var(--ink2);margin-bottom:14px}
+  .article p:last-child{margin-bottom:0}
+  .article strong{color:var(--ink)}
+  .side{display:grid;gap:14px;align-content:start}
+  .side-box{background:linear-gradient(160deg,rgba(155,123,255,.16),rgba(30,24,64,.9));border:1px solid var(--line);border-radius:16px;padding:20px}
+  .side-box h4{font-size:14.5px;font-weight:800;margin-bottom:10px;color:var(--cyan)}
+  .side-box ol{list-style:none;counter-reset:n;display:grid;gap:9px}
+  .side-box li{font-size:13.5px;color:var(--ink2);display:flex;gap:10px;align-items:flex-start}
+  .side-box li::before{counter-increment:n;content:counter(n,decimal-leading-zero);font-weight:800;color:var(--pink);font-size:12px;line-height:1.9}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:34px 0 26px;background:rgba(23,18,50,.55)}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+  .foot .brand{font-weight:800;font-size:16px;display:flex;align-items:center;gap:9px}
+  .foot .brand .mark{width:26px;height:26px;flex:0 0 26px}
+  .foot p{font-size:12.8px;color:var(--ink2);max-width:34em;margin-top:8px}
+  .foot-links{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--ink2)}
+  .foot-links a:hover{color:var(--cyan)}
+  .copy{font-size:12px;color:#6f6890;margin-top:24px;border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:28px}
+    .hero-art{order:-1}
+    .cards{grid-template-columns:1fr 1fr}
+    .gal{grid-template-columns:1fr 1fr}
+    .notes{grid-template-columns:1fr}
+    nav ul{
+      display:none;position:absolute;top:66px;left:0;right:0;
+      flex-direction:column;gap:0;background:rgba(15,12,29,.98);
+      border-bottom:1px solid var(--line);padding:8px 20px 14px;
+    }
+    nav ul.open{display:flex}
+    nav ul li{padding:9px 0;border-bottom:1px solid var(--line)}
+    .menu-toggle{display:block;order:3}
+    .nav-cta{display:none}
+    .row{grid-template-columns:56px 1fr;gap:12px}
+    .row .meta{grid-column:2;font-size:12px}
+  }
+  @media (max-width:560px){
+    .cards{grid-template-columns:1fr}
+    .gal{grid-template-columns:1fr 1fr}
+    .hero{padding:34px 0 26px}
+    section{padding:34px 0}
+    .hero-stats{gap:18px}
+    .article{padding:20px}
+    .nav{height:60px}
+    nav ul{top:60px}
+  }
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="91次元 首页">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="16" fill="#1b1436" stroke="rgba(255,255,255,.12)"/>
+        <circle cx="32" cy="32" r="16" fill="none" stroke="#ff5fa2" stroke-width="4"/>
+        <circle cx="26" cy="29" r="3" fill="#64e2ff"/>
+        <circle cx="38" cy="29" r="3" fill="#64e2ff"/>
+        <path d="M26 39q6 5 12 0" stroke="#ffd166" stroke-width="3" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span>91次元</span>
+    </a>
+    <nav>
+      <ul id="navList">
+        <li><a href="#updates">番剧更新</a></li>
+        <li><a href="#channels">分区导航</a></li>
+        <li><a href="#gallery">图鉴精选</a></li>
+        <li><a href="#guide">站内说明</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="#updates">看本周更新</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="展开导航" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><i></i>二次元内容集合</span>
+        <h1>91次元</h1>
+        <p class="lead">
+          <strong>91次元</strong>把分散的二次元内容收拢到一个入口：新番更新节奏、同人插画图鉴、角色档案与社区话题，按作品与分区组织，方便你从"想追哪部"直接走到"看哪一集、翻哪一页"。
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-main" href="#updates">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            浏览番剧更新
+          </a>
+          <a class="btn btn-ghost" href="#gallery">打开图鉴精选</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b>4</b><span>内容分区</span></div>
+          <div class="stat"><b>每周</b><span>更新节奏</span></div>
+          <div class="stat"><b>1 站</b><span>统一入口</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="frame">
+          <svg viewBox="0 0 400 300" role="img" aria-label="91次元主题插画：屏幕与光点">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#9b7bff"/><stop offset="1" stop-color="#ff5fa2"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stop-color="#64e2ff"/><stop offset="1" stop-color="#9b7bff"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="300" fill="#171232"/>
+            <circle cx="300" cy="70" r="60" fill="url(#g1)" opacity=".28"/>
+            <circle cx="90" cy="230" r="70" fill="url(#g2)" opacity=".22"/>
+            <rect x="70" y="70" width="200" height="130" rx="14" fill="#1e1840" stroke="rgba(255,255,255,.18)"/>
+            <rect x="86" y="88" width="60" height="8" rx="4" fill="#ff5fa2"/>
+            <rect x="86" y="106" width="150" height="6" rx="3" fill="rgba(255,255,255,.22)"/>
+            <rect x="86" y="122" width="120" height="6" rx="3" fill="rgba(255,255,255,.16)"/>
+            <rect x="86" y="146" width="72" height="34" rx="8" fill="url(#g2)" opacity=".85"/>
+            <rect x="170" y="146" width="72" height="34" rx="8" fill="rgba(255,95,162,.32)" stroke="rgba(255,95,162,.7)"/>
+            <circle cx="300" cy="170" r="26" fill="none" stroke="#ffd166" stroke-width="3" stroke-dasharray="6 6"/>
+            <path d="M292 170l6 6 12-14" stroke="#ffd166" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="110" cy="52" r="4" fill="#64e2ff"/>
+            <circle cx="330" cy="238" r="5" fill="#ff5fa2"/>
+            <circle cx="52" cy="120" r="3" fill="#ffd166"/>
+          </svg>
+        </div>
+        <div class="caption"><span>主题视觉 · 屏幕 / 光点</span><span>91次元</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPDATES -->
+  <section id="updates">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>番剧<em>更新</em>走廊</h2>
+          <p>按播出状态查看近期条目。列表只写作品名、集数与状态，点选标签可快速缩小范围。</p>
+        </div>
+        <a class="more" href="#guide">更新节奏说明</a>
+      </div>
+      <div class="filters" id="filters">
+        <button class="chip on" data-f="all">全部</button>
+        <button class="chip" data-f="new">本季新番</button>
+        <button class="chip" data-f="fin">已完结</button>
+        <button class="chip" data-f="long">长篇连载</button>
+      </div>
+      <div class="list" id="updateList">
+        <article class="row" data-cat="new">
+          <div class="tag new">新番</div>
+          <h3>《星轨邮差》<small>奇幻 / 原创动画</small></h3>
+          <div class="meta">更新至第 4 话</div>
+        </article>
+        <article class="row" data-cat="new">
+          <div class="tag new">新番</div>
+          <h3>《夏日回声电台》<small>青春 / 音乐</small></h3>
+          <div class="meta">更新至第 3 话</div>
+        </article>
+        <article class="row" data-cat="long">
+          <div class="tag">连载</div>
+          <h3>《海雾行记》<small>冒险 / 群像</small></h3>
+          <div class="meta">更新至第 27 话</div>
+        </article>
+        <article class="row" data-cat="fin">
+          <div class="tag fin">完结</div>
+          <h3>《纸灯与猫》<small>日常 / 治愈</small></h3>
+          <div class="meta">全 12 话 · 已完结</div>
+        </article>
+        <article class="row" data-cat="long">
+          <div class="tag">连载</div>
+          <h3>《零号观测站》<small>科幻 / 悬疑</small></h3>
+          <div class="meta">更新至第 41 话</div>
+        </article>
+      </div>
+      <p class="empty" id="emptyTip">该分类下暂无条目，切换其他标签看看。</p>
+    </div>
+  </section>
+
+  <!-- CHANNELS -->
+  <section id="channels">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>四个<em>分区</em>，四种看法</h2>
+          <p>91次元的内容按"看什么、看多久、和谁聊"拆开，避免在一个页面里堆满互不相干的条目。</p>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff5fa2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="3"/><path d="M8 21h8"/></svg>
+          </div>
+          <h3>番剧更新</h3>
+          <p>以周为单位跟踪新番与长篇连载的播出进度，标注集数和完结状态，追更时先看这里。</p>
+          <span class="kw">番</span>
+        </div>
+        <div class="card">
+          <div class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#64e2ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5-9 9"/></svg>
+          </div>
+          <h3>同人图鉴</h3>
+          <p>按作品与角色归档插画与短篇视觉，每张图附作者与主题标签，方便按兴趣翻找。</p>
+          <span class="kw">图</span>
+        </div>
+        <div class="card">
+          <div class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+          </div>
+          <h3>角色档案</h3>
+          <p>把作品里的主要角色、所属阵营与登场集数整理成卡片，讨论剧情时可直接对照。</p>
+          <span class="kw">角</span>
+        </div>
+        <div class="card">
+          <div class="ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9b7bff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3V12a8 8 0 0 1 8-8h2a8 8 0 0 1 8 8z"/></svg>
+          </div>
+          <h3>社区话题</h3>
+          <p>围绕当期热播作品展开的短评与观后感，按作品聚合成话题页，读几条就能跟上讨论。</p>
+          <span class="kw">聊</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>图鉴<em>精选</em></h2>
+          <p>本期从图鉴分区挑出四组主题，均在作品标签下归档，点开可继续按角色筛选。</p>
+        </div>
+        <a class="more" href="#channels">进入图鉴分区</a>
+      </div>
+      <div class="gal">
+        <figure>
+          <svg viewBox="0 0 300 200" role="img" aria-label="星轨邮差主题图">
+            <rect width="300" height="200" fill="#1e1840"/>
+            <circle cx="230" cy="56" r="34" fill="#ff5fa2" opacity=".5"/>
+            <path d="M0 160q80-50 160-14t140-6" fill="none" stroke="#64e2ff" stroke-width="3" opacity=".8"/>
+            <circle cx="90" cy="92" r="4" fill="#ffd166"/><circle cx="150" cy="70" r="3" fill="#fff"/>
+          </svg>
+          <figcaption><b>星轨邮差</b><span>科幻 / 光效</span></figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 300 200" role="img" aria-label="夏日回声电台主题图">
+            <rect width="300" height="200" fill="#251d4f"/>
+            <rect x="60" y="70" width="180" height="70" rx="10" fill="none" stroke="#ffd166" stroke-width="3"/>
+            <path d="M80 105h30M122 105h20M154 105h46" stroke="#ff5fa2" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="240" cy="60" r="18" fill="#64e2ff" opacity=".55"/>
+          </svg>
+          <figcaption><b>夏日回声电台</b><span>青春 / 音乐</span></figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 300 200" role="img" aria-label="海雾行记主题图">
+            <rect width="300" height="200" fill="#171232"/>
+            <path d="M0 140q50-26 100 0t100 0 100 0v60H0z" fill="#64e2ff" opacity=".35"/>
+            <path d="M0 158q50-24 100 0t100 0 100 0v42H0z" fill="#9b7bff" opacity=".45"/>
+            <circle cx="66" cy="56" r="20" fill="#ffd166" opacity=".7"/>
+          </svg>
+          <figcaption><b>海雾行记</b><span>冒险 / 群像</span></figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 300 200" role="img" aria-label="纸灯与猫主题图">
+            <rect width="300" height="200" fill="#1e1840"/>
+            <rect x="112" y="46" width="76" height="88" rx="38" fill="#ffd166" opacity=".8"/>
+            <path d="M150 134v34M118 168h64" stroke="#ff5fa2" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="70" cy="150" r="16" fill="#64e2ff" opacity=".4"/>
+          </svg>
+          <figcaption><b>纸灯与猫</b><span>日常 / 治愈</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section id="guide">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>怎么用 91次元</h2>
+          <p>这一节说明站点的组织方式与更新习惯，也交代哪些内容是静态整理、哪些会随时间变化。</p>
+        </div>
+      </div>
+      <div class="notes">
+        <div class="article">
+          <h3>先定作品，再定入口</h3>
+          <p>91次元的页面顺序按访问习惯排列：先看番剧更新确认进度，再进分区找图鉴或角色资料，最后到话题区看他人解读。三个步骤互不依赖，你也可以只做其中一件。</p>
+          <p><strong>更新列表</strong>只记录作品名、集数与状态，不涉及具体播放地址；<strong>图鉴</strong>按作品名归档，附主题标签而非单张作品的推荐排序；<strong>角色档案</strong>与<strong>话题</strong>互相引用，讨论里提到的角色可在档案里找到登场信息。</p>
+          <p>91次元的内容以整理与索引为主，条目会随新番播出追加，已完结作品保留归档。若你在某一分区没找到想看的内容，通常是因为该作品尚未进入当期整理范围，而不是站点不再维护。</p>
+          <p>站内所有分类标签都可以点击切换，番剧走廊的筛选会在当前列表内即时生效，不跳转页面。移动端导航收进菜单按钮，展开后与桌面端顺序一致。</p>
+        </div>
+        <div class="side">
+          <div class="side-box">
+            <h4>浏览顺序建议</h4>
+            <ol>
+              <li>在番剧走廊确认本期更新</li>
+              <li>进入图鉴按作品筛选插画</li>
+              <li>用角色档案对照登场信息</li>
+              <li>到话题区读当期短评</li>
+            </ol>
+          </div>
+          <div class="side-box">
+            <h4>站点说明</h4>
+            <ol>
+              <li>内容以整理与索引为主</li>
+              <li>条目随播出节奏追加</li>
+              <li>完结作品保留归档</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="brand">
+          <svg class="mark" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="16" fill="#1b1436" stroke="rgba(255,255,255,.12)"/>
+            <circle cx="32" cy="32" r="16" fill="none" stroke="#ff5fa2" stroke-width="4"/>
+            <circle cx="26" cy="29" r="3" fill="#64e2ff"/>
+            <circle cx="38" cy="29" r="3" fill="#64e2ff"/>
+            <path d="M26 39q6 5 12 0" stroke="#ffd166" stroke-width="3" fill="none" stroke-linecap="round"/>
+          </svg>
+          <span>91次元</span>
+        </div>
+        <p>91次元是一个二次元内容索引首页，围绕番剧更新、同人图鉴、角色档案与社区话题组织内容，帮助访客从作品出发快速找到对应的分区入口。</p>
+      </div>
+      <div class="foot-links">
+        <a href="#updates">番剧更新</a>
+        <a href="#channels">分区导航</a>
+        <a href="#gallery">图鉴精选</a>
+        <a href="#guide">站内说明</a>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© 91次元 · 内容索引与整理</span>
+      <span>页面内容以作品标签归档，条目随更新节奏调整</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 移动端导航
+  var toggle = document.getElementById('menuToggle');
+  var navList = document.getElementById('navList');
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      var open = navList.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navList.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        navList.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // 番剧更新筛选
+  var chips = document.querySelectorAll('.chip');
+  var rows = document.querySelectorAll('#updateList .row');
+  var emptyTip = document.getElementById('emptyTip');
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      chips.forEach(function (c) { c.classList.remove('on'); });
+      chip.classList.add('on');
+      var f = chip.getAttribute('data-f');
+      var shown = 0;
+      rows.forEach(function (row) {
+        var match = (f === 'all') || (row.getAttribute('data-cat') === f);
+        row.style.display = match ? '' : 'none';
+        if (match) shown++;
+      });
+      emptyTip.style.display = shown ? 'none' : 'block';
+    });
+  });
+</script>
+</body>
+</html>
